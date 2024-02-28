@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const apiUrl = 'https://65d4dd133f1ab8c6343627d8.mockapi.io/contacts';
-//
+
 export const fetchContacts = createAsyncThunk(
   'phonebook/fetchContacts',
   async () => {
