@@ -53,10 +53,8 @@ const Register = () => {
       const data = await response.json();
       const token = data.token;
 
-      // Save the token to Redux store
       dispatch(setToken(token));
 
-      console.log(token);
       navigate('/contacts');
     } catch (error) {
       alert('Error during registration:', error);

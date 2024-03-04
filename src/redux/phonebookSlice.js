@@ -1,11 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { setToken } from './tokenSlice';
 
-const apiUrl = 'https://65d4dd133f1ab8c6343627d8.mockapi.io/contacts';
+const apiUrl = 'https://connections-api.herokuapp.com/contacts';
 
-export const fetchContacts = createAsyncThunk(
-  'phonebook/fetchContacts',
-  async () => {
-    const response = await fetch(apiUrl);
+export const fetchContactsWithToken = createAsyncThunk(
+  'phonebook/fetchContactsWithToken',
+  async (_, { getState }) => {
+    const token = getState().token;
+    const response = await fetch(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     return data;
   }
@@ -13,11 +19,13 @@ export const fetchContacts = createAsyncThunk(
 
 export const addContact = createAsyncThunk(
   'phonebook/addContact',
-  async newContact => {
+  async (newContact, { getState }) => {
+    const token = getState().token;
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(newContact),
     });
@@ -29,9 +37,13 @@ export const addContact = createAsyncThunk(
 
 export const removeContact = createAsyncThunk(
   'phonebook/removeContact',
-  async contactId => {
+  async (contactId, { getState }) => {
+    const token = getState().token;
     const response = await fetch(`${apiUrl}/${contactId}`, {
       method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     if (!response.ok) {
@@ -74,9 +86,9 @@ export const phonebookSlice = createSlice({
     };
 
     builder
-      .addCase(fetchContacts.pending, handlePending)
-      .addCase(fetchContacts.fulfilled, handleFulfilled)
-      .addCase(fetchContacts.rejected, handleRejected)
+      .addCase(fetchContactsWithToken.pending, handlePending)
+      .addCase(fetchContactsWithToken.fulfilled, handleFulfilled)
+      .addCase(fetchContactsWithToken.rejected, handleRejected)
       .addCase(addContact.pending, handlePending)
       .addCase(addContact.fulfilled, (state, action) => {
         state.status = 'succeeded';
