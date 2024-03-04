@@ -1,3 +1,4 @@
+import UserMenu from 'components/UserMenu/UserMenu';
 import { StyledNav, StyledUl, StyledLi, StyledLink } from './NavigationStyles';
 
 const Navigation = () => {
@@ -12,6 +13,9 @@ const Navigation = () => {
         </StyledLi>
         <StyledLi>
           <StyledLink to="/contacts">📞 Contacts</StyledLink>
+        </StyledLi>
+        <StyledLi>
+          <StyledLink to="/user">👤 User</StyledLink>
         </StyledLi>
       </StyledUl>
     </StyledNav>

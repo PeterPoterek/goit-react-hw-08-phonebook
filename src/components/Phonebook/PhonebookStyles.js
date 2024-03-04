@@ -18,6 +18,7 @@ export const PhonebookWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
+  border: 3px solid #ccc;
 `;
 
 export const PhonebookHeader = styled.h2`
