@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import UserMenu from './UserMenu/UserMenu.jsx';
 import Navigation from './Navigation/Navigation.jsx';
@@ -7,8 +8,10 @@ import Phonebook from './Phonebook/Phonebook.jsx';
 import Login from './Login/Login.jsx';
 import Register from './Register/Register.jsx';
 
-const isAuthenticated = () => {
-  return true;
+const useIsAuthenticated = () => {
+  const token = useSelector(state => state.token);
+
+  return token !== null;
 };
 
 const App = () => {
@@ -21,7 +24,9 @@ const App = () => {
 
         <Route
           path="/contacts"
-          element={isAuthenticated() ? <Phonebook /> : <Navigate to="/login" />}
+          element={
+            useIsAuthenticated() ? <Phonebook /> : <Navigate to="/login" />
+          }
         />
 
         <Route path="/login" element={<Login />} />
@@ -29,7 +34,9 @@ const App = () => {
 
         <Route
           path="/user"
-          element={isAuthenticated() ? <UserMenu /> : <Navigate to="/login" />}
+          element={
+            useIsAuthenticated() ? <UserMenu /> : <Navigate to="/login" />
+          }
         />
 
         <Route />
