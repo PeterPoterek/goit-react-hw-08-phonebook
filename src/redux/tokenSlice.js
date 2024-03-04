@@ -1,13 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const loadTokenFromStorage = () => {
+  try {
+    const storedToken = localStorage.getItem('token');
+    return storedToken ? JSON.parse(storedToken) : null;
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
+};
+
 const tokenSlice = createSlice({
   name: 'token',
-  initialState: null,
+  initialState: loadTokenFromStorage(),
   reducers: {
     setToken: (state, action) => {
-      return action.payload;
+      const newToken = action.payload;
+      localStorage.setItem('token', JSON.stringify(newToken));
+      return newToken;
     },
-    clearToken: () => null,
+    clearToken: () => {
+      localStorage.removeItem('token');
+      return null;
+    },
   },
 });
 

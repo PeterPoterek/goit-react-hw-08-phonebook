@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { setToken } from '../../redux/tokenSlice.js';
 import {
   StyledLoginContainer,
   StyledLoginForm,
@@ -10,8 +11,6 @@ import {
   StyledLoginInput,
   StyledLoginButton,
 } from './LoginStyles';
-
-import { setToken } from '../../redux/tokenSlice.js';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -43,6 +42,8 @@ const Login = () => {
       const token = response.data.token;
 
       dispatch(setToken(token));
+
+      localStorage.setItem('token', JSON.stringify(token));
 
       navigate('/contacts');
     } catch (error) {
