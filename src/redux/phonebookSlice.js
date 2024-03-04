@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { setToken } from './tokenSlice';
 
 const apiUrl = 'https://connections-api.herokuapp.com/contacts';
 
