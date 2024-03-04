@@ -7,16 +7,11 @@ import {
   fetchContactsWithToken,
   removeContact,
 } from '../../redux/phonebookSlice.js';
-import {
-  selectContacts,
-  selectFilter,
-  selectToken,
-} from '../../redux/selectors.js';
+import { selectContacts, selectFilter } from '../../redux/selectors.js';
 
 const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  const token = useSelector(state => state.token);
   const filter = useSelector(selectFilter);
 
   useEffect(() => {
