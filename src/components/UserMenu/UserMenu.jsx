@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { clearToken } from '../../redux/tokenSlice.js';
 
 import {
   StyledUserMenuContainer,
@@ -27,6 +29,7 @@ const fetchUserEmail = async token => {
 };
 
 const UserMenu = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector(state => state.token);
 
@@ -45,7 +48,8 @@ const UserMenu = () => {
   }, [token]);
 
   const handleLogout = () => {
-    // dispatch(clearToken());
+    dispatch(clearToken());
+    navigate('/login');
   };
 
   return (
