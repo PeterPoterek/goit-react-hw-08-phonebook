@@ -37,6 +37,8 @@ export const StyledLoginInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 4px;
   min-width: 250px;
+
+  font-size: 1.5rem;
 `;
 
 export const StyledLoginButton = styled.button`
