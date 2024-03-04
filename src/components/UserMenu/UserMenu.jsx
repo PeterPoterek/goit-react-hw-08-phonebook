@@ -8,6 +8,7 @@ import {
   StyledUserMenuContainer,
   StyledUserInfo,
   StyledLogoutButton,
+  StyledUserMenuCard,
 } from './UserMenuStyles';
 
 const fetchUserEmail = async token => {
@@ -56,11 +57,15 @@ const UserMenu = () => {
     <StyledUserMenuContainer>
       {userInfo && (
         <>
-          <StyledUserInfo>{userInfo.name}</StyledUserInfo>
-          <StyledUserInfo>{userInfo.email}</StyledUserInfo>
+          <StyledUserMenuCard>
+            <StyledUserInfo>User: {userInfo.name}</StyledUserInfo>
+            <StyledUserInfo>Email: {userInfo.email}</StyledUserInfo>
+            <StyledLogoutButton onClick={handleLogout}>
+              Logout
+            </StyledLogoutButton>
+          </StyledUserMenuCard>
         </>
       )}
-      <StyledLogoutButton onClick={handleLogout}>Logout</StyledLogoutButton>
     </StyledUserMenuContainer>
   );
 };

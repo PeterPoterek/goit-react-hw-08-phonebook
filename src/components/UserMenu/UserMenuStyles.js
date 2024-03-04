@@ -12,15 +12,18 @@ export const StyledUserMenuCard = styled.div`
   background-color: #1f2937;
   border: 2px solid #ccc;
   border-radius: 8px;
-  padding: 20px;
+  padding: 25px 30px;
+
   display: flex;
+  flex-direction: column;
+
   align-items: center;
-  gap: 10px;
+  gap: 2rem;
 `;
 
 export const StyledUserInfo = styled.div`
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 `;
 
 export const StyledLogoutButton = styled.button`
